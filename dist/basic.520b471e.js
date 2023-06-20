@@ -125,7 +125,7 @@ var address = document.getElementById("input-address");
 var admin = document.getElementById("input-admin");
 var checkbox = document.getElementById("input-admin");
 var table = document.getElementById("table-one");
-var deleteButton = document.getElementById("delete-data");
+var deleteButton = document.getElementById("empty-table");
 button.addEventListener("click", function () {
   console.log("Button clicked!");
   if (!ifExist(usrnm.value)) {
