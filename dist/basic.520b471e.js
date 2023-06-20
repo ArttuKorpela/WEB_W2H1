@@ -128,28 +128,45 @@ var table = document.getElementById("table-one");
 var deleteButton = document.getElementById("delete-data");
 button.addEventListener("click", function () {
   console.log("Button clicked!");
-  var newRow = document.createElement("tr");
-  var cell1 = document.createElement("td");
-  cell1.textContent = usrnm.value;
-  newRow.appendChild(cell1);
-  var cell2 = document.createElement("td");
-  cell2.textContent = email.value;
-  newRow.appendChild(cell2);
-  var cell3 = document.createElement("td");
-  cell3.textContent = address.value;
-  newRow.appendChild(cell3);
-  var cell4 = document.createElement("td");
-  if (checkbox.checked) {
-    cell4.textContent = "X";
-  } else {
-    cell4.textContent = "-";
+  if (!ifExist(usrnm.value)) {
+    var newRow = document.createElement("tr");
+    var cell1 = document.createElement("td");
+    cell1.textContent = usrnm.value;
+    newRow.appendChild(cell1);
+    var cell2 = document.createElement("td");
+    cell2.textContent = email.value;
+    newRow.appendChild(cell2);
+    var cell3 = document.createElement("td");
+    cell3.textContent = address.value;
+    newRow.appendChild(cell3);
+    var cell4 = document.createElement("td");
+    if (checkbox.checked) {
+      cell4.textContent = "X";
+    } else {
+      cell4.textContent = "-";
+    }
+    newRow.appendChild(cell4);
+    table.appendChild(newRow);
   }
-  newRow.appendChild(cell4);
-  table.appendChild(newRow);
 });
 deleteButton.addEventListener("click", function () {
   table.remove();
 });
+function ifExist(username) {
+  for (var n = 0; n < table.rows.length; n++) {
+    if (table.rows[n].cells[0].textContent === username) {
+      table.rows[n].cells[1].textContent = email.value;
+      table.rows[n].cells[2].textContent = address.value;
+      if (checkbox.checked) {
+        table.rows[n].cells[3].textContent = "X";
+      } else {
+        table.rows[n].cells[3].textContent = "-";
+      }
+      return true;
+    }
+  }
+  return false;
+}
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
