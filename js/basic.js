@@ -40,7 +40,7 @@ button.addEventListener("click", function () {
 });
 
 deleteButton.addEventListener("click", function () {
-  table.remove();
+  table.innerHTML = "";
 });
 
 function ifExist(username) {
