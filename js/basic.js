@@ -7,6 +7,7 @@ const admin = document.getElementById("input-admin");
 let checkbox = document.getElementById("input-admin");
 
 let table = document.getElementById("table-one");
+let deleteButton = document.getElementById("delete-data");
 
 button.addEventListener("click", function () {
   console.log("Button clicked!");
@@ -34,4 +35,8 @@ button.addEventListener("click", function () {
   newRow.appendChild(cell4);
   
   table.appendChild(newRow);
+});
+
+deleteButton.addEventListener("click", function () {
+  table.remove();
 });

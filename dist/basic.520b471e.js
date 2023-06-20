@@ -125,6 +125,7 @@ var address = document.getElementById("input-address");
 var admin = document.getElementById("input-admin");
 var checkbox = document.getElementById("input-admin");
 var table = document.getElementById("table-one");
+var deleteButton = document.getElementById("delete-data");
 button.addEventListener("click", function () {
   console.log("Button clicked!");
   var newRow = document.createElement("tr");
@@ -145,6 +146,9 @@ button.addEventListener("click", function () {
   }
   newRow.appendChild(cell4);
   table.appendChild(newRow);
+});
+deleteButton.addEventListener("click", function () {
+  table.remove();
 });
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -171,7 +175,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42259" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46745" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
