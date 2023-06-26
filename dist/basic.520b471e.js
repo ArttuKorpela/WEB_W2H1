@@ -182,7 +182,7 @@ function ifExist(username) {
   return false;
 }
 var fileSelect = document.getElementById("fileSelect"),
-  fileElem = document.getElementById("input image"),
+  fileElem = document.getElementById("#input-image"),
   fileList = document.getElementById("fileList");
 fileSelect.addEventListener("click", function (e) {
   if (fileElem) {
