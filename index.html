@@ -7,12 +7,13 @@
 
 <body>
 	<div id="app">
-		<table id = "table-one">
+		<table id = "table tr">
 			<tr>
 				<th>Username</th>
 				<th>Email</th>
 				<th>Address</th>
 				<th>Admin</th>
+				<th>Pic</th>
 			</tr>
 			<tr>
 				<td> A1 </td>
@@ -53,6 +54,18 @@
 				</form>
 	</div>
 	<script src="./js/basic.js" type="text/javascript" defer></script>
+
+	<input
+  		type="file"
+  		id="input image"
+  		multiple
+ 		accept="image/*"
+  		style="display:none" />
+	<a href="#" id="fileSelect">Select some files</a>
+	<div id="fileList">
+  	<p>No files selected!</p>
+</div>
+
 </body>
 
 </html>

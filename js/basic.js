@@ -6,7 +6,7 @@ const address = document.getElementById("input-address");
 const admin = document.getElementById("input-admin");
 let checkbox = document.getElementById("input-admin");
 
-let table = document.getElementById("table-one");
+let table = document.getElementById("table tr");
 let deleteButton = document.getElementById("empty-table");
 
 button.addEventListener("click", function () {
@@ -35,9 +35,29 @@ button.addEventListener("click", function () {
     }
     newRow.appendChild(cell4);
 
-    table.appendChild(newRow);
-  }
+    let cell5 = document.createElement("td");
+
+    if (fileElem.files.length == 0) {
+      cell5.innerHTML ="Add picture"
+      newRow.appendChild(cell5);
+    } else {
+      let profilePic = document.createElement("img");
+      profilePic.src = URL.createObjectURL(fileElem.files[0]);
+        profilePic.height = 64;
+        profilePic.onload = () => {
+          URL.revokeObjectURL(profilePic.src);
+        };
+
+        cell5.appendChild(profilePic);
+        newRow.appendChild(cell5);
+    }
+      table.appendChild(newRow);
+    }
+
+
 });
+
+
 
 deleteButton.addEventListener("click", function () {
   table.innerHTML = "";
@@ -60,3 +80,45 @@ function ifExist(username) {
   }
   return false;
 }
+
+
+const fileSelect = document.getElementById("fileSelect"),
+  fileElem = document.getElementById("input image"),
+  fileList = document.getElementById("fileList");
+
+fileSelect.addEventListener(
+  "click",
+  (e) => {
+    if (fileElem) {
+      fileElem.click();
+    }
+    e.preventDefault(); // prevent navigation to "#"
+  },
+  false
+);
+
+fileElem.addEventListener("change", handleFiles, false);
+
+function handleFiles() {
+  if (!this.files.length) {
+    fileList.innerHTML = "<p>No files selected!</p>";
+  } else {
+  
+    fileList.innerHTML = "";
+    const list = document.createElement("ul");
+    fileList.appendChild(list);
+    for (let i = 0; i < this.files.length; i++) {
+      const li = document.createElement("li");
+      list.appendChild(li);
+
+      const img = document.createElement("img");
+      img.src = URL.createObjectURL(this.files[i]);
+      img.height = 64;
+      img.onload = () => {
+        URL.revokeObjectURL(img.src);
+      };
+      li.appendChild(img);
+    }
+  }
+}
+
