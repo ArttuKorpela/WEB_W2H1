@@ -117,105 +117,58 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/basic.js":[function(require,module,exports) {
-var button = document.getElementById("submit-data");
-var usrnm = document.getElementById("input-username");
-var email = document.getElementById("input-email");
-var address = document.getElementById("input-address");
-var admin = document.getElementById("input-admin");
-var checkbox = document.getElementById("input-admin");
-var table = document.getElementById("table tr");
-var deleteButton = document.getElementById("empty-table");
-button.addEventListener("click", function () {
-  console.log("Button clicked!");
-  if (!ifExist(usrnm.value)) {
-    var newRow = document.createElement("tr");
-    var cell1 = document.createElement("td");
-    cell1.textContent = usrnm.value;
-    newRow.appendChild(cell1);
-    var cell2 = document.createElement("td");
-    cell2.textContent = email.value;
-    newRow.appendChild(cell2);
-    var cell3 = document.createElement("td");
-    cell3.textContent = address.value;
-    newRow.appendChild(cell3);
-    var cell4 = document.createElement("td");
-    if (checkbox.checked) {
-      cell4.textContent = "X";
-    } else {
-      cell4.textContent = "-";
-    }
-    newRow.appendChild(cell4);
-    var cell5 = document.createElement("td");
-    if (fileElem.files.length == 0) {
-      cell5.innerHTML = "Add picture";
-      newRow.appendChild(cell5);
-    } else {
-      var profilePic = document.createElement("img");
-      profilePic.src = URL.createObjectURL(fileElem.files[0]);
-      profilePic.height = 64;
-      profilePic.onload = function () {
-        URL.revokeObjectURL(profilePic.src);
-      };
-      cell5.appendChild(profilePic);
-      newRow.appendChild(cell5);
-    }
-    table.appendChild(newRow);
+})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
-});
-deleteButton.addEventListener("click", function () {
-  table.innerHTML = "";
-});
-function ifExist(username) {
-  for (var n = 0; n < table.rows.length; n++) {
-    if (table.rows[n].cells[0].textContent === username) {
-      table.rows[n].cells[1].textContent = email.value;
-      table.rows[n].cells[2].textContent = address.value;
-      if (checkbox.checked) {
-        table.rows[n].cells[3].textContent = "X";
-      } else {
-        table.rows[n].cells[3].textContent = "-";
+  return bundleURL;
+}
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+  return '/';
+}
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
       }
-      return true;
     }
-  }
-  return false;
+    cssTimeout = null;
+  }, 50);
 }
-var fileSelect = document.getElementById("fileSelect"),
-  fileElem = document.getElementById("input image"),
-  fileList = document.getElementById("fileList");
-fileSelect.addEventListener("click", function (e) {
-  if (fileElem) {
-    fileElem.click();
-  }
-  e.preventDefault(); // prevent navigation to "#"
-}, false);
-fileElem.addEventListener("change", handleFiles, false);
-function handleFiles() {
-  var _this = this;
-  if (!this.files.length) {
-    fileList.innerHTML = "<p>No files selected!</p>";
-  } else {
-    fileList.innerHTML = "";
-    var list = document.createElement("ul");
-    fileList.appendChild(list);
-    var _loop = function _loop() {
-      var li = document.createElement("li");
-      list.appendChild(li);
-      var img = document.createElement("img");
-      img.src = URL.createObjectURL(_this.files[i]);
-      img.height = 64;
-      img.onload = function () {
-        URL.revokeObjectURL(img.src);
-      };
-      li.appendChild(img);
-    };
-    for (var i = 0; i < this.files.length; i++) {
-      _loop();
-    }
-  }
-}
-},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -384,5 +337,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/basic.js"], null)
-//# sourceMappingURL=/basic.520b471e.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/index.js.map
